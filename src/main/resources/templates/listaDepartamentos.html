@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Lista de departamentos</title>
+
+    <!-- Fontfaces CSS-->
+    <link th:href="@{~/css/font-face.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/font-awesome-5/css/fontawesome-all.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/mdi-font/css/material-design-iconic-font.min.css}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link th:href="@{~/vendor/bootstrap-4.1/bootstrap.min.css}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link th:href="@{~/vendor/animsition/animsition.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/wow/animate.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/css-hamburgers/hamburgers.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/slick/slick.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/select2/select2.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{~/vendor/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" media="all">
+	
+	<link th:href="@{~/vendor/notify/animate.min.css}" rel="stylesheet" media="all">
+	
+    <!-- Main CSS-->
+    <link th:href="@{~/css/theme.css}" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="#">
+                    <img th:src="@{~/images/icon/logo.png}" alt="Cool Admin" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li>
+                            <a th:href="@{~/home}">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Inicio
+							</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-user"></i>
+                                Personas
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a th:href="@{/Persona/listar}">Lista de personas</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/Persona/nuevo}">Nueva persona</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Departamentos
+							</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a th:href="@{/Departamento/listar}">Lista de departamentos</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/Departamento/nuevo}">Nuevo departamento</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <div class="form-header" action="" method="POST">
+                            </div>
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <img th:src="@{~/images/icon/avatar-01.png}" alt="John Doe" />
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">Administrador</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__footer">
+                                                <form th:action="@{~/logout}" method="post" id="logout">
+                                                	<a href="javascript:$('#logout').submit()">
+                                                		<i class="zmdi zmdi-power"></i>
+														Cerrar Sesión
+                                                	</a>
+												</form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+			                <div class="col-md-12">
+			                    <div class="overview-wrap">
+			                        <h2 class="title-1">Lista de departamentos</h2>
+			                    </div>
+			                </div>
+			            </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive table--no-card m-b-30">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nombre</th>
+                                                <th class="text-right">Cantidad de municipios</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <th:block th:each="departamento:${departamentos}" >
+                                            	<tr>
+	                                                <td th:text="${departamento.id}"></td>
+	                                                <td th:text="${departamento.nombre}"></td>
+	                                                <td class="text-right" th:text="${departamento.cantMunicipios}"></td>
+	                                                <td>
+	                                                	<a th:href="@{/Departamento/editar/}+${departamento.id}" class="btn btn-warning btn-sm">
+	                                                		<i class="fas fa-pencil-alt"></i>
+	                                                		Editar
+	                                                	</a>
+	                                                	<a th:href="@{/Departamento/eliminar/}+${departamento.id}" class="btn btn-danger btn-sm">
+	                                                		<i class="fas fa-eraser"></i>
+	                                                		Eliminar
+	                                                	</a>
+	                                                </td>
+	                                            </tr>
+                                            </th:block>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script th:src="@{~/vendor/jquery-3.2.1.min.js}"></script>
+    <!-- Bootstrap JS-->
+    <script th:src="@{~/vendor/bootstrap-4.1/popper.min.js}"></script>
+    <script th:src="@{~/vendor/bootstrap-4.1/bootstrap.min.js}"></script>
+    <!-- Vendor JS       -->
+    <script th:src="@{~/vendor/slick/slick.min.js}">
+    </script>
+    <script th:src="@{~/vendor/wow/wow.min.js}"></script>
+    <script th:src="@{~/vendor/animsition/animsition.min.js}"></script>
+    <script th:src="@{~/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}">
+    </script>
+    <script th:src="@{~/vendor/counter-up/jquery.waypoints.min.js}"></script>
+    <script th:src="@{~/vendor/counter-up/jquery.counterup.min.js}">
+    </script>
+    <script th:src="@{~/vendor/circle-progress/circle-progress.min.js}"></script>
+    <script th:src="@{~/vendor/perfect-scrollbar/perfect-scrollbar.js}"></script>
+    <script th:src="@{~/vendor/chartjs/Chart.bundle.min.js}"></script>
+    <script th:src="@{~/vendor/select2/select2.min.js}">
+    </script>
+    <script th:src="@{~/vendor/notify/bootstrap-notify.js}"></script>
+
+    <!-- Main JS-->
+    <script th:src="@{~/js/main.js}"></script>
+    
+    <script th:inline="javascript" th:if="${icono != null}">
+    	
+    	icono = /*[[${icono}]]*/ + "";
+    	mensaje = /*[[${mensaje}]]*/ + "";
+    	severidad = /*[[${severidad}]]*/ + "";
+    
+    	$.notify({
+	        // options
+	        icon: icono,
+        	message: mensaje
+	    },{
+	        // settings
+	        type: severidad,
+	        placement: {
+	            from: "bottom",
+	            align: "right"
+	        }
+	    });
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->
